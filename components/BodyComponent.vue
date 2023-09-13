@@ -1,47 +1,45 @@
 <template>
-  <div ref="canvasWrapper" class="container" style="width: 100%; height: 100%;"></div>
+  <div id="three-container"></div>
 </template>
 
 <script>
 import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
 export default {
   mounted() {
-    this.initThree();
-  },
-  methods: {
-    initThree() {
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    // Create a scene
+    const scene = new THREE.Scene();
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+    scene.add(ambientLight);
+    // Create a camera
+    const camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.z = 5;
 
-      const renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      this.$refs.canvasWrapper.appendChild(renderer.domElement);
+    // Create a renderer
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.getElementById('three-container').appendChild(renderer.domElement);
+    //load the model
+    const loader = new GLTFLoader();
 
-      const geometry = new THREE.BoxGeometry();
-      const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-      const cube = new THREE.Mesh(geometry, material);
-      scene.add(cube);
+    loader.load('/3dModels/funko/scene.gltf', function (gltf) {
+      const model = gltf.scene;
+      model.scale.set(0.01, 0.01, 0.01); // Adjust the scale as needed
+      scene.add(model);
+    }, undefined, function (error) {
+      console.error(error);
+    });
 
-      camera.position.z = 5;
+    THREE.Cache.enabled = true;
 
-      function animate() {
-        requestAnimationFrame(animate);
-
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
-
-        renderer.render(scene, camera);
-      }
-
-      animate();
+    //animate scene
+    function animate() {
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
     }
+
+    animate(); // Call the animate function to start the loop
   }
 };
 </script>
-
-<style>
-.container {
-  overflow: hidden;
-}
-</style>
