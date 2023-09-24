@@ -2,6 +2,7 @@
 $primary-color: #000000;
 $underline-color: #ff8e8e;
 
+
 #__nuxt {
   background-color: $primary-color;
 }
@@ -11,7 +12,7 @@ body, a {
   text-decoration: none;
 }
 
-.footer-container, .header-container, body {
+.footer-container, .body-component-wrapper, .header-container, body {
   position: relative;
 }
 
@@ -27,6 +28,7 @@ body, a {
 
 #three-container {
   max-width: 100%;
+  position: relative;
 }
 
 .footer-container {
@@ -38,15 +40,23 @@ body, a {
   font-weight: 700;
 }
 
-.trademark-text {
+.trademark-text a {
   font-size: 0.8rem;
-  color: #e2e2e2;
+  color: #797979;
+  &:hover {
+    transition: ease-in-out 0.3s;
+    color: #ff8e8e;
+  }
 }
 
 a {
   position: relative;
   text-decoration: none;
   padding: 5px;
+  &:hover {
+    transition: ease-in-out 0.3s;
+    color: #ff8e8e;
+  }
 }
 
 a::before {
@@ -64,4 +74,13 @@ a::before {
 
 a:hover::before {
   transform: scaleX(1);
+}
+
+.body-component-wrapper {
+  display: grid;
+  justify-items: center;
+}
+
+#about {
+  font-size: clamp(40px, 2vw, 55px);
 }
