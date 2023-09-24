@@ -1,6 +1,6 @@
 <template>
-  <div class="header-container">
-    <h1>Footer Component</h1>
+  <div class="footer-container">
+    <div class="trademark-text">© Evangelos Drivakos </div>
   </div>
 </template>
 
