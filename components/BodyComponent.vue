@@ -1,9 +1,9 @@
 <template>
   <div class="body-component-wrapper">
     <div id="about">
-      Evan Drivakos is a software engineer with a passion for creating and learning. He is currently a student at Uop and
-      is working towards a degree in computer science. He has experience with Java, C++, C#, Python, and JavaScript.
-      He is also working on a project that uses the Three.js library.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies ultrices, nunc
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies ultrices, nunc
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies ultrices, nunc
     </div>
   </div>
   <div id="three-container"></div>
