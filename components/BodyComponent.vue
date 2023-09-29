@@ -50,12 +50,14 @@ export default {
     const material = new THREE.MeshStandardMaterial({color: 0x00ff00, wireframe: true});
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
+
     //animate scene
     const animate = () => {
       requestAnimationFrame(animate);
       //to do add rotation and animation
-      renderer.render(scene, camera);
+      scene.rotation.y += 0.01;
       cube.rotation.x += 0.01;
+      renderer.render(scene, camera);
     };
 
     animate(); // Call the animate function
