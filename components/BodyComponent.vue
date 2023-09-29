@@ -15,6 +15,14 @@ import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
 export default {
+  data() {
+    return {
+      fov: 5,
+      camera: null,
+      scene: null,
+      renderer: null,
+    };
+  },
   mounted() {
 
     // Create a scene
@@ -23,7 +31,7 @@ export default {
     scene.add(ambientLight);
 
     // Create a camera
-    const camera = new THREE.PerspectiveCamera(5, window.innerWidth / window.innerHeight, 0.1, 10);
+    const camera = new THREE.PerspectiveCamera(this.fov, window.innerWidth / window.innerHeight, 0.1, 10);
     camera.position.z = 5;
     camera.position.x = 0;
 
@@ -31,6 +39,11 @@ export default {
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.getElementById('three-container').appendChild(renderer.domElement);
+
+    //add grid helper
+    const gridHelper = new THREE.GridHelper(100, 100, 0xaec6cf, 0xaec6cf)
+    scene.add(gridHelper)
+
     //load the model
     const loader = new GLTFLoader();
 
@@ -45,22 +58,25 @@ export default {
     });
 
     THREE.Cache.enabled = true;
-    //adding random cube in order to understand physics :P
-    const geometry = new THREE.BoxGeometry(100, 3, 16, 100);
-    const material = new THREE.MeshStandardMaterial({color: 0x00ff00, wireframe: true});
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
 
     //animate scene
     const animate = () => {
       requestAnimationFrame(animate);
       //to do add rotation and animation
-      scene.rotation.y += 0.01;
-      cube.rotation.x += 0.01;
+      scene.rotation.y += 0.001;
       renderer.render(scene, camera);
     };
 
+    // Add a scroll event listener
     animate(); // Call the animate function
+
   },
+  methods: {
+    animate() {
+      requestAnimationFrame(this.animate);
+      // Add your rotation and animation logic here
+      this.renderer.render(this.scene, this.camera);
+    },
+  }
 };
 </script>
