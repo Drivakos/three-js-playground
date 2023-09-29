@@ -59,6 +59,14 @@ export default {
 
     THREE.Cache.enabled = true;
 
+    window.addEventListener('resize', onWindowResize, false)
+    function onWindowResize() {
+      camera.aspect = window.innerWidth / window.innerHeight
+      camera.updateProjectionMatrix()
+      renderer.setSize(window.innerWidth, window.innerHeight)
+      this.renderer.render()
+    }
+
     //animate scene
     const animate = () => {
       requestAnimationFrame(animate);
