@@ -3,9 +3,10 @@ $primary-color: #000000;
 $underline-color: #ff8e8e;
 
 
-#__nuxt {
+body {
   background-color: $primary-color;
 }
+
 body, a {
   font-family: Mabry pro, sans-serif;
   color: #e2e2e2;

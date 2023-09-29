@@ -16,12 +16,14 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
 export default {
   mounted() {
+
     // Create a scene
     const scene = new THREE.Scene();
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
     scene.add(ambientLight);
+
     // Create a camera
-    const camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 100);
+    const camera = new THREE.PerspectiveCamera(5, window.innerWidth / window.innerHeight, 0.1, 10);
     camera.position.z = 5;
     camera.position.x = 0;
 
@@ -32,7 +34,7 @@ export default {
     //load the model
     const loader = new GLTFLoader();
 
-    loader.load('/3dModels/nike_shoe/scene.gltf', function (gltf) {
+    loader.load('/3dModels/nike_air_jordan_1/scene.gltf', function (gltf) {
       const model = gltf.scene;
       model.scale.set(0.9, 0.9, 0.9); // Adjust the scale as needed
       model.rotateX(0.6);
@@ -43,17 +45,17 @@ export default {
     });
 
     THREE.Cache.enabled = true;
-
+    //adding random cube in order to understand physics :P
+    const geometry = new THREE.BoxGeometry(100, 3, 16, 100);
+    const material = new THREE.MeshStandardMaterial({color: 0x00ff00, wireframe: true});
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
     //animate scene
     const animate = () => {
       requestAnimationFrame(animate);
-
-      // Apply the rotation to the model if it exists
-      if (this.model && !this.mouseDown) {
-        this.model.rotation.copy(this.modelRotation);
-      }
-
+      //to do add rotation and animation
       renderer.render(scene, camera);
+      cube.rotation.x += 0.01;
     };
 
     animate(); // Call the animate function
