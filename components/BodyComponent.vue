@@ -21,6 +21,7 @@ export default {
       camera: null,
       scene: null,
       renderer: null,
+      lastScrollTop: 0,
     };
   },
   mounted() {
@@ -71,7 +72,17 @@ export default {
     const animate = () => {
       requestAnimationFrame(animate);
       //to do add rotation and animation
-      scene.rotation.y += 0.001;
+      //if user scrolls down, rotate the model
+      console.log(scrollY, scrollX)
+      console.log(this.lastScrollTop, 'last scroll top')
+      if (scrollY > this.lastScrollTop) {
+        scene.rotateX(0.01);
+        this.lastScrollTop = scrollY <= 0 ? 0 : scrollY;
+      }
+      else {
+        scene.rotateY(0.01);
+        this.lastScrollTop = scrollY <= 0 ? 0 : scrollY;
+      }
       renderer.render(scene, camera);
     };
 
@@ -83,6 +94,8 @@ export default {
     animate() {
       requestAnimationFrame(this.animate);
       // Add your rotation and animation logic here
+      this.renderer.setClearColor(0x000000, 0); // Use a clear color with alpha set to 0
+      document.getElementById('three-container').appendChild(renderer.domElement);
       this.renderer.render(this.scene, this.camera);
     },
   }
