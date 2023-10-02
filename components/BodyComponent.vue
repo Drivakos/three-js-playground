@@ -13,6 +13,7 @@
 <script>
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 export default {
   data() {
@@ -28,25 +29,29 @@ export default {
 
     // Create a scene
     const scene = new THREE.Scene();
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
-    scene.add(ambientLight);
 
     // Create a camera
     const camera = new THREE.PerspectiveCamera(this.fov, window.innerWidth / window.innerHeight, 0.1, 10);
     camera.position.z = 5;
     camera.position.x = 0;
 
+    const ambientLight = new THREE.AmbientLight( 0xffffff );
+    scene.add( ambientLight );
+
+    const pointLight = new THREE.PointLight( 0xffffff, 15 );
+    camera.add( pointLight );
+    scene.add( camera );
+
     // Create a renderer
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.getElementById('three-container').appendChild(renderer.domElement);
 
-    //add grid helper
-    const gridHelper = new THREE.GridHelper(100, 100, 0xaec6cf, 0xaec6cf)
-    scene.add(gridHelper)
-
     //load the model
     const loader = new GLTFLoader();
+
+    scene.background = new THREE.Color(0xffffff);
+
 
     loader.load('/3dModels/nike_air_jordan_1/scene.gltf', function (gltf) {
       const model = gltf.scene;
@@ -71,33 +76,16 @@ export default {
     //animate scene
     const animate = () => {
       requestAnimationFrame(animate);
-      //to do add rotation and animation
-      //if user scrolls down, rotate the model
-      console.log(scrollY, scrollX)
-      console.log(this.lastScrollTop, 'last scroll top')
-      if (scrollY > this.lastScrollTop) {
-        scene.rotateX(0.01);
-        this.lastScrollTop = scrollY <= 0 ? 0 : scrollY;
-      }
-      else {
-        scene.rotateY(0.01);
-        this.lastScrollTop = scrollY <= 0 ? 0 : scrollY;
-      }
       renderer.render(scene, camera);
     };
+
+    const controls = new  OrbitControls( camera, renderer.domElement );
+    controls.minDistance = 2;
+    controls.maxDistance = 5;
 
     // Add a scroll event listener
     animate(); // Call the animate function
 
-  },
-  methods: {
-    animate() {
-      requestAnimationFrame(this.animate);
-      // Add your rotation and animation logic here
-      this.renderer.setClearColor(0x000000, 0); // Use a clear color with alpha set to 0
-      document.getElementById('three-container').appendChild(renderer.domElement);
-      this.renderer.render(this.scene, this.camera);
-    },
   }
 };
 </script>
