@@ -1,6 +1,8 @@
 // App styles
 $primary-color: #000000;
-$underline-color: #ff8e8e;
+$underline-color: #ff0000;
+$underline-text-color: #ffa6a6;
+
 
 
 body {
@@ -46,7 +48,7 @@ body, a {
   color: #797979;
   &:hover {
     transition: ease-in-out 0.3s;
-    color: #ff8e8e;
+    color: $underline-text-color;
   }
 }
 
@@ -56,7 +58,7 @@ a {
   padding: 5px;
   &:hover {
     transition: ease-in-out 0.3s;
-    color: #ff8e8e;
+    color: $underline-text-color;
   }
 }
 
@@ -86,6 +88,14 @@ a:hover::before {
 #about {
   font-size: clamp(40px, 2vw, 55px);
   z-index: 0;
-  position: relative;
-  top: 150px;
+}
+
+.swoosh {
+  font-weight: 700;
+  font-size: clamp(80px, 10vw, 155px);
+}
+
+.app-bg {
+  background-image: url("/bg.png");
+  background-size: cover;
 }

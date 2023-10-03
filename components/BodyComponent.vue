@@ -1,13 +1,5 @@
 <template>
-  <div class="body-component-wrapper">
-    <div id="about">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies ultrices, nunc
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies ultrices, nunc
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies ultrices, nunc
-    </div>
-  </div>
-  <div id="three-container"></div>
-
+    <div id="three-container"></div>
 </template>
 
 <script>
@@ -43,21 +35,19 @@ export default {
     scene.add( camera );
 
     // Create a renderer
-    const renderer = new THREE.WebGLRenderer();
+    let renderer = new THREE.WebGLRenderer({
+      alpha: true // NOTE: only this is important for a clear background!!!
+    });
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.getElementById('three-container').appendChild(renderer.domElement);
 
     //load the model
     const loader = new GLTFLoader();
 
-    scene.background = new THREE.Color(0xffffff);
-
-
     loader.load('/3dModels/nike_air_jordan_1/scene.gltf', function (gltf) {
       const model = gltf.scene;
-      model.scale.set(0.9, 0.9, 0.9); // Adjust the scale as needed
-      model.rotateX(0.6);
-      model.rotateY(0.9);
+      model.scale.set(0.9, 0.9, 0.9);
+
       scene.add(model);
     }, undefined, function (error) {
       console.error(error);
@@ -79,13 +69,7 @@ export default {
       renderer.render(scene, camera);
     };
 
-    const controls = new  OrbitControls( camera, renderer.domElement );
-    controls.minDistance = 2;
-    controls.maxDistance = 5;
-
-    // Add a scroll event listener
-    animate(); // Call the animate function
-
+    animate();
   }
 };
 </script>
