@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="position: relative">
     <div class="body-component-wrapper">
       <div id="contact">
         <div class="swoosh">

@@ -1,0 +1,272 @@
+<template>
+  <div class="contact-text-wrapper">
+    <div id="text">
+      <div class="line">
+        <p class="word">A</p>
+        <p class="word">Programmer</p>
+      </div>
+
+      <div class="line">
+        <p class="word">web developer</p>
+        <p class="word">&</p>
+      </div>
+
+      <div class="line">
+        <a class="word fancy">CodePendence</a>
+      </div>
+
+      <div class="line">
+        <a
+            id="channel-link"
+            href="https://youtube.com/@hyperplexed"
+            target="_blank"
+            class="word fancy"
+        >
+          @Drivakos
+        </a>
+      </div>
+    </div>
+  </div>
+
+</template>
+
+<script>
+export default {
+  mounted() {
+    const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+    const enhance = id => {
+      const element = document.getElementById(id),
+          text = element.innerText.split("");
+
+      element.innerText = "";
+
+      text.forEach((value, index) => {
+        const outer = document.createElement("span");
+
+        outer.className = "outer";
+
+        const inner = document.createElement("span");
+
+        inner.className = "inner";
+
+        inner.style.animationDelay = `${rand(-5000, 0)}ms`;
+
+        const letter = document.createElement("span");
+
+        letter.className = "letter";
+
+        letter.innerText = value;
+
+        letter.style.animationDelay = `${index * 1000}ms`;
+
+        inner.appendChild(letter);
+
+        outer.appendChild(inner);
+
+        element.appendChild(outer);
+      });
+    }
+
+    enhance("channel-link");
+  },
+};
+</script>
+
+<style>
+:root {
+  --green: rgb(42, 252, 152);
+  --blue: rgb(41, 121, 255);
+}
+
+@keyframes float {
+  from, to {
+    transform: translateY(-0%);
+  }
+
+  50% {
+    transform: translateY(-3%);
+  }
+}
+
+@keyframes background-pan {
+  from {
+    background-position: 1000% center;
+  }
+
+  to {
+    background-position: 0% center;
+  }
+}
+
+body {
+  height: 100%;
+  background-color: black;
+  margin: 0;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+}
+
+.word {
+  color: #d97171;
+  font-size: clamp(2rem, 8vw, 10rem);
+  font-family: "Rubik", sans-serif;
+  margin: 0;
+  text-transform: uppercase;
+  transition: opacity 250ms ease;
+}
+
+a {
+  text-decoration: none;
+}
+
+#text:has(.fancy:hover) .word:not(.fancy:hover) {
+  opacity: 0.2;
+}
+
+.fancy span {
+  display: inline-block;
+}
+
+.fancy > .outer {
+  transition: transform 350ms ease;
+}
+
+.fancy:hover > .outer {
+  transition-duration: 800ms;
+}
+
+.fancy:hover > .outer > .inner {
+  animation: float 5s ease infinite;
+}
+
+.fancy:hover > .outer > .inner > .letter {
+  background: linear-gradient(
+      to right,
+      var(--blue),
+      var(--green),
+      var(--blue)
+  );
+  background-size: 1000%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: background-pan 150s linear infinite;
+}
+
+.fancy:hover > .outer:nth-child(1) {
+  transform: translate(-80%, 60%) rotate(8deg);
+}
+
+.fancy:hover > .outer:nth-child(2) {
+  transform: translate(-40%, 20%) rotate(4deg);
+}
+
+.fancy:hover > .outer:nth-child(3) {
+  transform: translate(-10%, 60%) rotate(-6deg);
+}
+
+.fancy:hover > .outer:nth-child(4) {
+  transform: translate(0%, 8%) rotate(-8deg);
+}
+
+.fancy:hover > .outer:nth-child(5) {
+  transform: translate(0%, -20%) rotate(5deg);
+}
+
+.fancy:hover > .outer:nth-child(6) {
+  transform: translate(0%, 20%) rotate(-3deg);
+}
+
+.fancy:hover > .outer:nth-child(7) {
+  transform: translate(0%, -40%) rotate(-5deg);
+}
+
+.fancy:hover > .outer:nth-child(8) {
+  transform: translate(0%, 15%) rotate(10deg);
+}
+
+.fancy:hover > .outer:nth-child(9) {
+  transform: translate(0%, -50%) rotate(8deg);
+}
+
+.fancy:hover > .outer:nth-child(10) {
+  transform: translate(0%, 15%) rotate(-6deg);
+}
+
+.fancy:hover > .outer:nth-child(11) {
+  transform: translate(50%, -10%) rotate(-3deg);
+}
+
+.fancy:hover > .outer:nth-child(12) {
+  transform: translate(120%, -30%) rotate(-10deg);
+}
+
+/* -- YouTube Link Styles -- */
+
+body.menu-toggled > .meta-link > span {
+  color: rgb(30, 30, 30);
+}
+
+#source-link {
+  bottom: 60px;
+}
+
+#source-link > i {
+  color: rgb(94, 106, 210);
+}
+
+#yt-link > i {
+  color: rgb(239, 83, 80);
+}
+
+.meta-link {
+  align-items: center;
+  backdrop-filter: blur(3px);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  bottom: 10px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  display: inline-flex;
+  gap: 5px;
+  left: 10px;
+  padding: 10px 20px;
+  position: fixed;
+  text-decoration: none;
+  transition: background-color 400ms, border-color 400ms;
+  z-index: 10000;
+}
+
+.meta-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.meta-link > i, .meta-link > span {
+  height: 20px;
+  line-height: 20px;
+}
+
+.meta-link > span {
+  color: white;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+}
+
+.contact-text-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.fancy {
+  text-decoration: underline;
+}
+</style>
