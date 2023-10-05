@@ -2,17 +2,18 @@
   <div class="contact-text-wrapper">
     <div id="text">
       <div class="line">
-        <p class="word">A</p>
-        <p class="word">Programmer</p>
+        <p class="word">Drivakos</p>
+        <p class="word">Evangelos</p>
       </div>
 
       <div class="line">
-        <p class="word">web developer</p>
+        <p class="word">fullstack</p>
+        <p class="word"> dev</p>
+      </div>
+
+      <div class="line">
         <p class="word">&</p>
-      </div>
-
-      <div class="line">
-        <a class="word fancy">CodePendence</a>
+        <p class="word">so much more</p>
       </div>
 
       <div class="line">
@@ -22,7 +23,7 @@
             target="_blank"
             class="word fancy"
         >
-          @Drivakos
+          @socials
         </a>
       </div>
     </div>
@@ -99,9 +100,9 @@ export default {
   }
 }
 
-body {
+.contact-text-wrapper {
   height: 100%;
-  background-color: black;
+  padding-bottom: 100px;
   margin: 0;
   overflow: hidden;
   display: grid;

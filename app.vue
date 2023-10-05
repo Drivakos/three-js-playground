@@ -2,6 +2,7 @@
   <div class="app-bg">
     <HeaderComponent></HeaderComponent>
     <BodyComponent></BodyComponent>
+    <ContactComponent></ContactComponent>
     <FooterComponent></FooterComponent>
   </div>
 </template>

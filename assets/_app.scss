@@ -52,7 +52,32 @@ body, a {
     color: $underline-text-color;
   }
 }
+.header-container {
 
+  a::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: $underline-color;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  a:hover::before {
+    transform: scaleX(1);
+  }
+
+  .body-component-wrapper {
+    display: grid;
+    justify-items: center;
+    height: 100%;
+  }
+
+}
 a {
   position: relative;
   text-decoration: none;
@@ -63,28 +88,6 @@ a {
   }
 }
 
-a::before {
-  content: "";
-  position: absolute;
-  display: block;
-  width: 100%;
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: $underline-color;
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-a:hover::before {
-  transform: scaleX(1);
-}
-
-.body-component-wrapper {
-  display: grid;
-  justify-items: center;
-  height: 100%;
-}
 
 #about {
   font-size: clamp(40px, 2vw, 55px);
@@ -99,4 +102,20 @@ a:hover::before {
 .app-bg {
   background-image: url("/bg.png");
   background-size: cover;
+}
+
+.header-wrapper {
+  h1 {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(3rem, 10vw, 10rem);
+    color: white;
+    padding: 0rem clamp(1rem, 2vw, 3rem);
+    border-radius: clamp(0.4rem, 0.75vw, 1rem);
+    width: fit-content;
+  }
+
+  h1:hover {
+    background-color: white;
+    color: black;
+  }
 }

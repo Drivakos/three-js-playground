@@ -17,7 +17,7 @@ export default {
   },
   mounted() {
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(this.fov, window.innerWidth / window.innerHeight, 0.1, 10);
+    const camera = new THREE.PerspectiveCamera(this.fov, (window.innerWidth / 2) / (window.innerHeight / 2), 0.1, 10);
     camera.position.z = 5;
     camera.position.x = 0;
 
